@@ -9,6 +9,7 @@ import java.util.Map;
 public class FormComponent {
         public String label;
         public String type;
+        public String dateLabel;
         public String subtype;
         public String text;
         public Layout layout;

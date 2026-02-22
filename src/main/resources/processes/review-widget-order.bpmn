@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0zexwom" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.43.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.24.0">
-  <bpmn:process id="review-widget-order" name="review-widget-order" isExecutable="true">
-    <bpmn:startEvent id="Event_1c5hcvh" name="Approve or Reject Widget order" camunda:initiator="WidgetOrderPlaced">
-      <bpmn:outgoing>Flow_1ev5nzi</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_1vwfpvv" />
-    </bpmn:startEvent>
-    <bpmn:manualTask id="Activity_0qdytn8" name="Review Widget Order">
-      <bpmn:incoming>Flow_1ev5nzi</bpmn:incoming>
-      <bpmn:outgoing>Flow_0uqrhap</bpmn:outgoing>
-    </bpmn:manualTask>
-    <bpmn:userTask id="Activity_1jvp1k3" name="Display Widget Details">
+  <bpmn:process id="reviewWidgetOrder" name="ReviewWidgetOrder" isExecutable="true" camunda:historyTimeToLive="2">
+    <bpmn:userTask id="Activity_1jvp1k3" name="Decide order outcome">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:outputParameter name="order_approved">true</camunda:outputParameter>
@@ -29,47 +21,51 @@
     <bpmn:sequenceFlow id="Flow_15jr6ci" name="Approved" sourceRef="Gateway_07w16w7" targetRef="Activity_1d02w3r">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${order_approved =="true"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:task id="Activity_07feeik">
-      <bpmn:incoming>Flow_10z5jf3</bpmn:incoming>
-    </bpmn:task>
-    <bpmn:sequenceFlow id="Flow_10z5jf3" name="Rejected" sourceRef="Gateway_07w16w7" targetRef="Activity_07feeik">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${order_approved == "false"}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:serviceTask id="Activity_1d02w3r" name="Provision widget">
+    <bpmn:serviceTask id="Activity_1d02w3r" name="Provision widget" camunda:class="github.com.torloejborg.flows.actions.ProvisionWidget">
       <bpmn:incoming>Flow_15jr6ci</bpmn:incoming>
       <bpmn:outgoing>Flow_1l76943</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_1l76943" sourceRef="Activity_1d02w3r" targetRef="Activity_1vsfqos" />
-    <bpmn:sendTask id="Activity_1vsfqos" name="Notify Customer">
+    <bpmn:sendTask id="Activity_1vsfqos" name="Notify Customer" camunda:class="github.com.torloejborg.flows.actions.NotifyCustomerApproved">
       <bpmn:incoming>Flow_1l76943</bpmn:incoming>
       <bpmn:outgoing>Flow_1sgzfo6</bpmn:outgoing>
     </bpmn:sendTask>
     <bpmn:endEvent id="Event_08lc7rk">
       <bpmn:incoming>Flow_1sgzfo6</bpmn:incoming>
+      <bpmn:incoming>Flow_188wb72</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1sgzfo6" sourceRef="Activity_1vsfqos" targetRef="Event_08lc7rk" />
+    <bpmn:sequenceFlow id="Flow_10z5jf3" name="Rejected" sourceRef="Gateway_07w16w7" targetRef="Activity_07feeik">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${order_approved == "false"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="Activity_0qdytn8" name="Review Widget Order" camunda:formKey="review_order">
+      <bpmn:incoming>Flow_1ev5nzi</bpmn:incoming>
+      <bpmn:outgoing>Flow_0uqrhap</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:startEvent id="Event_1c5hcvh" name="Approve or Reject Widget order" camunda:initiator="WidgetOrderPlaced">
+      <bpmn:outgoing>Flow_1ev5nzi</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1ov2tu5</bpmn:outgoing>
+      <bpmn:signalEventDefinition id="SignalEventDefinition_1tqgrl3" signalRef="Signal_202g113" />
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1ov2tu5" sourceRef="Event_1c5hcvh" targetRef="Activity_1vwo7wb" />
+    <bpmn:serviceTask id="Activity_1vwo7wb" name="Notify new order to approve" camunda:class="github.com.torloejborg.flows.actions.NotifyOrderReadyForApproval">
+      <bpmn:incoming>Flow_1ov2tu5</bpmn:incoming>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_188wb72" sourceRef="Activity_07feeik" targetRef="Event_08lc7rk" />
+    <bpmn:sendTask id="Activity_07feeik" name="Notify customer rejected" camunda:class="github.com.torloejborg.flows.actions.NotifyCustomerRejected">
+      <bpmn:incoming>Flow_10z5jf3</bpmn:incoming>
+      <bpmn:outgoing>Flow_188wb72</bpmn:outgoing>
+    </bpmn:sendTask>
   </bpmn:process>
+  <bpmn:signal id="Signal_202g113" name="WidgetOrderPlaced" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="review-widget-order">
-      <bpmndi:BPMNShape id="Event_0t6uj8u_di" bpmnElement="Event_1c5hcvh">
-        <dc:Bounds x="152" y="222" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="128" y="265" width="89" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0ya8sfm_di" bpmnElement="Activity_0qdytn8">
-        <dc:Bounds x="270" y="200" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="reviewWidgetOrder">
       <bpmndi:BPMNShape id="Activity_1dqvp9g_di" bpmnElement="Activity_1jvp1k3">
         <dc:Bounds x="460" y="200" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_07w16w7_di" bpmnElement="Gateway_07w16w7" isMarkerVisible="true">
         <dc:Bounds x="655" y="215" width="50" height="50" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_07feeik_di" bpmnElement="Activity_07feeik">
-        <dc:Bounds x="790" y="300" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0aewzlx_di" bpmnElement="Activity_1d02w3r">
         <dc:Bounds x="790" y="80" width="100" height="80" />
@@ -78,8 +74,24 @@
       <bpmndi:BPMNShape id="Activity_06lvtxp_di" bpmnElement="Activity_1vsfqos">
         <dc:Bounds x="980" y="80" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0e5admp_di" bpmnElement="Activity_0qdytn8">
+        <dc:Bounds x="270" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_025d7l9_di" bpmnElement="Event_1c5hcvh">
+        <dc:Bounds x="152" y="222" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="128" y="265" width="89" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1e18yp4_di" bpmnElement="Activity_1vwo7wb">
+        <dc:Bounds x="270" y="310" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_08lc7rk_di" bpmnElement="Event_08lc7rk">
-        <dc:Bounds x="1172" y="102" width="36" height="36" />
+        <dc:Bounds x="1012" y="252" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_01ovuva_di" bpmnElement="Activity_07feeik">
+        <dc:Bounds x="790" y="300" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1ev5nzi_di" bpmnElement="Flow_1ev5nzi">
         <di:waypoint x="188" y="240" />
@@ -101,6 +113,14 @@
           <dc:Bounds x="686" y="164" width="48" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1l76943_di" bpmnElement="Flow_1l76943">
+        <di:waypoint x="890" y="120" />
+        <di:waypoint x="980" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1sgzfo6_di" bpmnElement="Flow_1sgzfo6">
+        <di:waypoint x="1030" y="160" />
+        <di:waypoint x="1030" y="252" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_10z5jf3_di" bpmnElement="Flow_10z5jf3">
         <di:waypoint x="680" y="265" />
         <di:waypoint x="680" y="340" />
@@ -109,13 +129,16 @@
           <dc:Bounds x="688" y="300" width="44" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1l76943_di" bpmnElement="Flow_1l76943">
-        <di:waypoint x="890" y="120" />
-        <di:waypoint x="980" y="120" />
+      <bpmndi:BPMNEdge id="Flow_1ov2tu5_di" bpmnElement="Flow_1ov2tu5">
+        <di:waypoint x="188" y="240" />
+        <di:waypoint x="230" y="240" />
+        <di:waypoint x="230" y="350" />
+        <di:waypoint x="270" y="350" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1sgzfo6_di" bpmnElement="Flow_1sgzfo6">
-        <di:waypoint x="1080" y="120" />
-        <di:waypoint x="1172" y="120" />
+      <bpmndi:BPMNEdge id="Flow_188wb72_di" bpmnElement="Flow_188wb72">
+        <di:waypoint x="890" y="340" />
+        <di:waypoint x="1030" y="340" />
+        <di:waypoint x="1030" y="288" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

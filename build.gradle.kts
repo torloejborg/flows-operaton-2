@@ -20,19 +20,12 @@ dependencies {
     implementation("com.vaadin:vaadin-spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     developmentOnly("com.vaadin:vaadin-dev")
-//    implementation("org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter:7.20.0")
-//    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-//    implementation("org.jetbrains.kotlin:kotlin-reflect")
     runtimeOnly("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("org.camunda.bpm:camunda-engine:7.24.0")
-    // Source: https://mvnrepository.com/artifact/org.camunda.bpm.springboot/camunda-bpm-spring-boot-starter
     implementation("org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter:7.24.0")
-    // Exclude duplicate jaxb dependencies
-//    configurations.all {
-//        exclude(group = "org.glassfish.jaxb", module = "jaxb-core")
-//        exclude(group = "com.sun.xml.bind", module = "jaxb-core")
-//    }
+    implementation("org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-webapp:7.24.0")
+
 }
 
 // Force Vaadin version to avoid conflicts

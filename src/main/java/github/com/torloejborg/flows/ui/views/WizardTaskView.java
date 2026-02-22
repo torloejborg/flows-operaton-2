@@ -47,7 +47,9 @@ public class WizardTaskView extends VerticalLayout
                 .singleResult();
 
         if (task == null) {
-            add(new H2("Wizard completed - Thank your for your order!"));
+            add(new H2("Wizard completed!"));
+            add(new Button("Return", e -> UI.getCurrent().navigate(HomeView.class)));
+
             return;
         }
 
@@ -62,7 +64,6 @@ public class WizardTaskView extends VerticalLayout
         submit.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
         add(
-                new H3(task.getName()),
                 formRepository.render(formKey),
                 submit
         );

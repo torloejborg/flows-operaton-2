@@ -1,6 +1,15 @@
 {
   "components": [
     {
+      "text": "# Decide Widget usage",
+      "type": "text",
+      "layout": {
+        "row": "Row_0jsefil",
+        "columns": null
+      },
+      "id": "Field_0ua6zit"
+    },
+    {
       "label": "How will you use Widgets?",
       "values": [
         {

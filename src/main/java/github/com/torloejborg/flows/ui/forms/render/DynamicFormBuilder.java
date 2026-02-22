@@ -166,15 +166,15 @@ public class DynamicFormBuilder {
 
     private Component getText(FormComponent formComponent) {
 
-        if (formComponent.label == null) {
+        if (formComponent.text == null) {
             return new Text("");
         } else {
 
-            String txt = formComponent.label.replaceAll("#", "");
-            if (formComponent.label.contains("##")) {
+            String txt = formComponent.text.replaceAll("#", "");
+            if (formComponent.text.contains("##")) {
                 return new H2(txt);
             }
-            else if (formComponent.label.contains("#")) {
+            else if (formComponent.text.contains("#")) {
                 return new H1(txt);
             } else {
                 return new Text(formComponent.text);
@@ -193,7 +193,7 @@ public class DynamicFormBuilder {
 
     private DatePicker getDatePicker(FormComponent formComponent) {
         DatePicker datePicker = new DatePicker();
-        datePicker.setLabel(formComponent.label);
+        datePicker.setLabel(formComponent.dateLabel);
         datePicker.setOpened(false);
         return datePicker;
     }
