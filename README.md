@@ -5,7 +5,7 @@ A toy project for experimenting with workflows in the BPMN world
 
 ## Stuff used
 * SpingBoot 4.0.3
-* Vaadin 25.0.3
+* Vaadin 25.0.5
 * Camunda 7.0.24 (Legacy)
 
 ## Features
