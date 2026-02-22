@@ -1,0 +1,1 @@
+rootProject.name = "flows-camunda-7"
