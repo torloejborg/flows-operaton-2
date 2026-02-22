@@ -1,0 +1,64 @@
+{
+  "components": [
+    {
+      "subtype": "date",
+      "dateLabel": "Requested delivery date",
+      "type": "datetime",
+      "layout": {
+        "row": "Row_0vpsyg9",
+        "columns": null
+      },
+      "id": "Field_079nrmy",
+      "key": "datetime_7s2rlo"
+    },
+    {
+      "label": "Choose Widget Color",
+      "values": [
+        {
+          "label": "Red",
+          "value": "red"
+        },
+        {
+          "label": "Green",
+          "value": "green"
+        },
+        {
+          "label": "Blue",
+          "value": "blue"
+        },
+        {
+          "label": "Pink",
+          "value": "pink"
+        },
+        {
+          "label": "Cyan",
+          "value": "cyan"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_0228rmy",
+        "columns": null
+      },
+      "id": "Field_1vujbou",
+      "key": "radio_5hu3oc"
+    },
+    {
+      "label": "Other Special requirements",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_1fwe59l",
+        "columns": null
+      },
+      "id": "Field_15sz7hd",
+      "key": "textarea_kf0i3t"
+    }
+  ],
+  "type": "default",
+  "id": "step3",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.43.1"
+  },
+  "schemaVersion": 19
+}

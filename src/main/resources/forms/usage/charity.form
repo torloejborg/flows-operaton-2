@@ -1,0 +1,46 @@
+{
+  "components": [
+    {
+      "text": "# Specify your charitable usage of Widgets",
+      "type": "text",
+      "layout": {
+        "row": "Row_1sxrfi1",
+        "columns": null
+      },
+      "id": "Field_0w9wf0f"
+    },
+    {
+      "label": "Naughy choices",
+      "values": [
+        {
+          "label": "End World Hunger",
+          "value": "ewh"
+        },
+        {
+          "label": "Ensure everlasting Peace",
+          "value": "ep"
+        },
+        {
+          "label": "Free money for everyone",
+          "value": "fmfe"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_0x23zic",
+        "columns": null
+      },
+      "id": "Field_13t6yhn",
+      "key": "radio_mtwtvu"
+    }
+  ],
+  "type": "default",
+  "id": "usage_charity",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.43.1"
+  },
+  "schemaVersion": 19
+}

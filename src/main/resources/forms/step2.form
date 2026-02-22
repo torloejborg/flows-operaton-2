@@ -1,0 +1,35 @@
+{
+  "components": [
+    {
+      "label": "How will you use Widgets?",
+      "values": [
+        {
+          "label": "Personal enjoyment",
+          "value": "personal"
+        },
+        {
+          "label": "Nefarious purposes",
+          "value": "nefarious"
+        },
+        {
+          "label": "Charity",
+          "value": "charity"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_0ocwc6i",
+        "columns": null
+      },
+      "id": "Field_159fxns",
+      "key": "usage_choice"
+    }
+  ],
+  "type": "default",
+  "id": "step2",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.43.1"
+  },
+  "schemaVersion": 19
+}

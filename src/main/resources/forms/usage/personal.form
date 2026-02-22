@@ -1,0 +1,32 @@
+{
+  "components": [
+    {
+      "text": "# Personal reasons - Tell us why!",
+      "type": "text",
+      "layout": {
+        "row": "Row_1sxrfi1",
+        "columns": null
+      },
+      "id": "Field_0w9wf0f"
+    },
+    {
+      "label": "Text area",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_0354nsj",
+        "columns": null
+      },
+      "id": "Field_0mzhpzb",
+      "key": "textarea_dhm99"
+    }
+  ],
+  "type": "default",
+  "id": "usage_personal",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.43.1"
+  },
+  "schemaVersion": 19
+}

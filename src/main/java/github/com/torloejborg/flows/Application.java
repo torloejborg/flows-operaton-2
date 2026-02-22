@@ -1,11 +1,12 @@
-package com.example.flows;
+package github.com.torloejborg.flows;
 
-import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;
+import com.vaadin.flow.component.dependency.StyleSheet;
+import com.vaadin.flow.theme.lumo.Lumo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@EnableProcessApplication
+@StyleSheet(Lumo.STYLESHEET)
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

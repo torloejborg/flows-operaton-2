@@ -1,0 +1,46 @@
+{
+  "components": [
+    {
+      "text": "# Specify your nefarious usage of Widget",
+      "type": "text",
+      "layout": {
+        "row": "Row_1sxrfi1",
+        "columns": null
+      },
+      "id": "Field_0w9wf0f"
+    },
+    {
+      "label": "Naughy choices",
+      "values": [
+        {
+          "label": "Become a billionaire!",
+          "value": "bab"
+        },
+        {
+          "label": "World Domination",
+          "value": "wd"
+        },
+        {
+          "label": "Secret lair construction",
+          "value": "slc"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_0x23zic",
+        "columns": null
+      },
+      "id": "Field_13t6yhn",
+      "key": "radio_mtwtvu"
+    }
+  ],
+  "type": "default",
+  "id": "usage_nefarious",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.43.1"
+  },
+  "schemaVersion": 19
+}
