@@ -2,7 +2,9 @@ package github.com.torloejborg.flows.actions;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.springframework.stereotype.Component;
 
+@Component("NotifyCustomerApproved")
 public class NotifyCustomerApproved implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {

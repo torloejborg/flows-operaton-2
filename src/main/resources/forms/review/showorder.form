@@ -1,0 +1,22 @@
+{
+  "components": [
+    {
+      "text": "# Details goes here",
+      "type": "text",
+      "layout": {
+        "row": "Row_1t2towf",
+        "columns": null
+      },
+      "id": "Field_13d2opl"
+    }
+  ],
+  "type": "default",
+  "id": "Form_0j20qxb",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.43.1"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.24.0",
+  "schemaVersion": 19
+}

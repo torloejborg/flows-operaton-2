@@ -1,48 +1,22 @@
 package github.com.torloejborg.flows.ui.dto;
 
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.camunda.bpm.engine.task.Task;
+
+@Data
+@RequiredArgsConstructor
 public class TaskDTO {
-    private String created;
-    private String name;
-    private String assignee;
-    private String status;
+    private final String id;
+    private final String created;
+    private final String name;
+    private final String assignee;
+    private final String status;
+    private final String processInstanceId;
 
 
-    public TaskDTO(String created, String name, String assignee, String status) {
-        this.created = created;
-        this.name = name;
-        this.assignee = assignee;
-        this.status = status;
+    public static TaskDTO map(Task t) {
+        return new TaskDTO(t.getId(),t.getCreateTime().toString(),t.getName(),t.getAssignee(),t.getTaskState(),t.getProcessInstanceId());
     }
 
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAssignee() {
-        return assignee;
-    }
-
-    public void setAssignee(String assignee) {
-        this.assignee = assignee;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }

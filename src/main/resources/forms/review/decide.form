@@ -1,0 +1,42 @@
+{
+  "components": [
+    {
+      "text": "# Decide order outcome",
+      "type": "text",
+      "layout": {
+        "row": "Row_0ct1ugd",
+        "columns": null
+      },
+      "id": "Field_1ep80uz"
+    },
+    {
+      "label": "Approval",
+      "values": [
+        {
+          "label": "Accept",
+          "value": "true"
+        },
+        {
+          "label": "Deny",
+          "value": "false"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_1ew2o1n",
+        "columns": null
+      },
+      "id": "Field_01gko5g",
+      "key": "order_approved"
+    }
+  ],
+  "type": "default",
+  "id": "Form_08evq1z",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.43.1"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.24.0",
+  "schemaVersion": 19
+}

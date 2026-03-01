@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0zexwom" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.43.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.24.0">
   <bpmn:process id="reviewWidgetOrder" name="ReviewWidgetOrder" isExecutable="true" camunda:historyTimeToLive="2">
-    <bpmn:userTask id="Activity_1jvp1k3" name="Decide order outcome">
-      <bpmn:extensionElements>
-        <camunda:inputOutput>
-          <camunda:outputParameter name="order_approved">true</camunda:outputParameter>
-        </camunda:inputOutput>
-      </bpmn:extensionElements>
+    <bpmn:userTask id="Activity_1jvp1k3" name="Decide order outcome" camunda:formKey="review_decide">
+      <bpmn:extensionElements />
       <bpmn:incoming>Flow_0uqrhap</bpmn:incoming>
       <bpmn:outgoing>Flow_0pbhlyb</bpmn:outgoing>
     </bpmn:userTask>
@@ -21,12 +17,12 @@
     <bpmn:sequenceFlow id="Flow_15jr6ci" name="Approved" sourceRef="Gateway_07w16w7" targetRef="Activity_1d02w3r">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${order_approved =="true"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:serviceTask id="Activity_1d02w3r" name="Provision widget" camunda:class="github.com.torloejborg.flows.actions.ProvisionWidget">
+    <bpmn:serviceTask id="Activity_1d02w3r" name="Provision widget" camunda:delegateExpression="${ProvisionWidget}">
       <bpmn:incoming>Flow_15jr6ci</bpmn:incoming>
       <bpmn:outgoing>Flow_1l76943</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_1l76943" sourceRef="Activity_1d02w3r" targetRef="Activity_1vsfqos" />
-    <bpmn:sendTask id="Activity_1vsfqos" name="Notify Customer" camunda:class="github.com.torloejborg.flows.actions.NotifyCustomerApproved">
+    <bpmn:sendTask id="Activity_1vsfqos" name="Notify Customer" camunda:delegateExpression="${NotifyCustomerApproved}">
       <bpmn:incoming>Flow_1l76943</bpmn:incoming>
       <bpmn:outgoing>Flow_1sgzfo6</bpmn:outgoing>
     </bpmn:sendTask>
@@ -38,7 +34,7 @@
     <bpmn:sequenceFlow id="Flow_10z5jf3" name="Rejected" sourceRef="Gateway_07w16w7" targetRef="Activity_07feeik">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${order_approved == "false"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:userTask id="Activity_0qdytn8" name="Review Widget Order" camunda:formKey="review_order">
+    <bpmn:userTask id="Activity_0qdytn8" name="Review Widget Order" camunda:formKey="review_showorder">
       <bpmn:incoming>Flow_1ev5nzi</bpmn:incoming>
       <bpmn:outgoing>Flow_0uqrhap</bpmn:outgoing>
     </bpmn:userTask>
@@ -48,11 +44,11 @@
       <bpmn:signalEventDefinition id="SignalEventDefinition_1tqgrl3" signalRef="Signal_202g113" />
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="Flow_1ov2tu5" sourceRef="Event_1c5hcvh" targetRef="Activity_1vwo7wb" />
-    <bpmn:serviceTask id="Activity_1vwo7wb" name="Notify new order to approve" camunda:class="github.com.torloejborg.flows.actions.NotifyOrderReadyForApproval">
+    <bpmn:serviceTask id="Activity_1vwo7wb" name="Notify new order to approve" camunda:delegateExpression="${NotifyOrderReadyForApproval}">
       <bpmn:incoming>Flow_1ov2tu5</bpmn:incoming>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_188wb72" sourceRef="Activity_07feeik" targetRef="Event_08lc7rk" />
-    <bpmn:sendTask id="Activity_07feeik" name="Notify customer rejected" camunda:class="github.com.torloejborg.flows.actions.NotifyCustomerRejected">
+    <bpmn:sendTask id="Activity_07feeik" name="Notify customer rejected" camunda:delegateExpression="${NotifyCustomerRejected}">
       <bpmn:incoming>Flow_10z5jf3</bpmn:incoming>
       <bpmn:outgoing>Flow_188wb72</bpmn:outgoing>
     </bpmn:sendTask>
@@ -74,6 +70,9 @@
       <bpmndi:BPMNShape id="Activity_06lvtxp_di" bpmnElement="Activity_1vsfqos">
         <dc:Bounds x="980" y="80" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_08lc7rk_di" bpmnElement="Event_08lc7rk">
+        <dc:Bounds x="1012" y="252" width="36" height="36" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0e5admp_di" bpmnElement="Activity_0qdytn8">
         <dc:Bounds x="270" y="200" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -86,9 +85,6 @@
       <bpmndi:BPMNShape id="Activity_1e18yp4_di" bpmnElement="Activity_1vwo7wb">
         <dc:Bounds x="270" y="310" width="100" height="80" />
         <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_08lc7rk_di" bpmnElement="Event_08lc7rk">
-        <dc:Bounds x="1012" y="252" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_01ovuva_di" bpmnElement="Activity_07feeik">
         <dc:Bounds x="790" y="300" width="100" height="80" />

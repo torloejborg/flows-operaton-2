@@ -27,7 +27,7 @@
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_0aszn6k" sourceRef="Activity_0nqalxz" targetRef="Activity_1ovzg9p" />
     <bpmn:sequenceFlow id="Flow_0f7m04t" sourceRef="Activity_1ovzg9p" targetRef="Event_07ybgx4" />
-    <bpmn:serviceTask id="Activity_1ovzg9p" name="Persist Widget Order" camunda:class="github.com.torloejborg.flows.actions.PersistData">
+    <bpmn:serviceTask id="Activity_1ovzg9p" name="Persist Widget Order" camunda:delegateExpression="${PersistData}">
       <bpmn:incoming>Flow_0aszn6k</bpmn:incoming>
       <bpmn:outgoing>Flow_0f7m04t</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_1972mp5">
@@ -78,10 +78,6 @@
         <di:waypoint x="310" y="120" />
         <di:waypoint x="370" y="120" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_12azia3_di" bpmnElement="Flow_12azia3">
-        <di:waypoint x="470" y="120" />
-        <di:waypoint x="520" y="120" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0aszn6k_di" bpmnElement="Flow_0aszn6k">
         <di:waypoint x="620" y="120" />
         <di:waypoint x="680" y="120" />
@@ -93,6 +89,10 @@
       <bpmndi:BPMNEdge id="DataOutputAssociation_1972mp5_di" bpmnElement="DataOutputAssociation_1972mp5">
         <di:waypoint x="780" y="120" />
         <di:waypoint x="835" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12azia3_di" bpmnElement="Flow_12azia3">
+        <di:waypoint x="470" y="120" />
+        <di:waypoint x="520" y="120" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

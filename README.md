@@ -1,4 +1,4 @@
-# My Widget Factory
+# The Widget Factory
 
 A toy project for experimenting with workflows in the BPMN world. I use it to kick the tires of the Camunda engine - Starting with the embeddable legacy version.
 
