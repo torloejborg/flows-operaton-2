@@ -8,7 +8,7 @@ It demonstrates a somewhat bureaucratic approval process where different persona
 
 
 ## Stuff used
-* SpingBoot 4.0.5
+* SpingBoot 4.0.4
 * Vaadin 25.0.5
 * Operaton 2.0.0
 
