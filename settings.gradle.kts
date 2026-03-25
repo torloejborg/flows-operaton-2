@@ -1,1 +1,1 @@
-rootProject.name = "flows-camunda-7"
+rootProject.name = "flows-operaton-2"

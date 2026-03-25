@@ -1,7 +1,7 @@
 package github.com.torloejborg.flows.service;
 
 import github.com.torloejborg.flows.ui.dto.TaskDTO;
-import org.camunda.bpm.engine.TaskService;
+import org.operaton.bpm.engine.TaskService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

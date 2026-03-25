@@ -2,7 +2,7 @@ package github.com.torloejborg.flows.ui.dto;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.camunda.bpm.engine.task.Task;
+import org.operaton.bpm.engine.task.Task;
 
 @Data
 @RequiredArgsConstructor

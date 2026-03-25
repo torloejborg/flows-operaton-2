@@ -1,6 +1,6 @@
 # The Widget Factory
 
-A toy project for experimenting with workflows in the BPMN world. I use it to kick the tires of the Camunda engine - Starting with the embeddable legacy version.
+A toy project for experimenting with workflows in the BPMN world. I use it to kick the tires of the Operaton engine.
 
 The factory attempts to outline workflows where users can order widgets. 
 
@@ -8,9 +8,9 @@ It demonstrates a somewhat bureaucratic approval process where different persona
 
 
 ## Stuff used
-* SpingBoot 4.0.3
+* SpingBoot 4.0.5
 * Vaadin 25.0.5
-* Camunda 7.0.24 (Legacy)
+* Operaton 2.0.0
 
 ## Features
 * Dynamic form-rendering based on user-tasks with fixed form-keys
@@ -20,4 +20,4 @@ It demonstrates a somewhat bureaucratic approval process where different persona
 `gradlew bootRun`
 
 * http://localhost:8080 - The Widget Factory
-* http://localhost:8080/camunda - Camunda cockpit (demo/demo)
+* http://localhost:8080/operaton - Operaton cockpit (demo/demo)
